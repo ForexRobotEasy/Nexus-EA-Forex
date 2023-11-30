@@ -1,0 +1,116 @@
+
+// Developer: Forex Robot Easy Team
+// Developer's Site: forexroboteasy.com
+// Program Name: Nexus EA Forex
+
+// Include necessary libraries
+#include <Trade\Trade.mqh>
+#include <Indicators\Trend.mqh>
+#include <Indicators\Oscillator.mqh>
+
+// Define constants
+#define MAX_ENTRY_CONDITIONS 16
+#define TOTAL_DI 4
+
+// Initialize trading functions
+CTrade Trade;
+CTrend Trend;
+COscillator Oscillator;
+
+// Define entry conditions for trading
+enum EntryConditions
+{
+    // List of entry conditions
+    EC_1,
+    EC_2,
+    // ...
+    EC_16
+};
+
+// Define market analysis decision-making indicators
+enum DI
+{
+    // List of indicators
+    DI_1,
+    DI_2,
+    DI_3,
+    DI_4
+};
+
+// Function to execute trading algorithm
+void ExecuteAlgorithm()
+{
+    // Perform technical and price action analysis
+    double trend = Trend.GetTrend();
+    double oscillator = Oscillator.GetOscillator();
+    
+    // Perform additional market analysis using DI indicators
+    double di1 = GetDI(DI_1);
+    double di2 = GetDI(DI_2);
+    double di3 = GetDI(DI_3);
+    double di4 = GetDI(DI_4);
+    
+    // Select market entry condition based on analysis
+    EntryConditions entryCondition = SelectEntryCondition(trend, oscillator, di1, di2, di3, di4);
+    
+    // Execute trade based on selected entry condition
+    if (entryCondition == EC_1)
+    {
+        // Place buy order
+        Trade.Buy();
+    }
+    else if (entryCondition == EC_2)
+    {
+        // Place sell order
+        Trade.Sell();
+    }
+    // ...
+}
+
+// Function to select market entry condition
+EntryConditions SelectEntryCondition(double trend, double oscillator, double di1, double di2, double di3, double di4)
+{
+    // Logic to select entry condition based on analysis
+    // ...
+    
+    // Return selected entry condition
+    return EC_1;
+}
+
+// Function to retrieve DI value
+double GetDI(DI di)
+{
+    // Logic to retrieve DI value based on indicator
+    // ...
+    
+    // Return DI value
+    return 0.0;
+}
+
+// Entry point of the program
+int OnInit()
+{
+    // Initialize trading settings
+    Trade.SetSymbol(Symbol());
+    Trade.SetExpertMagicNumber(123456);
+    
+    // Execute trading algorithm
+    ExecuteAlgorithm();
+    
+    // Return initialization result
+    return(INIT_SUCCEEDED);
+}
+
+// Main program loop
+void OnTick()
+{
+    // Execute trading algorithm on each tick
+    ExecuteAlgorithm();
+}
+
+// Program termination
+void OnDeinit(const int reason)
+{
+    // Perform cleanup tasks
+    // ...
+}
